@@ -28,13 +28,11 @@ class versaoController extends Controller {
     }
 
     public function atualizar(){
-        $tabela = $this->getParams(0);
+        if (isset($_POST['tabela'])){
+            $tabela = $_POST['tabela'];
 
-        $namespace_base = DEFINED('NAMESPACE_BASE') ? NAMESPACE_BASE : 'mvc';
-
-        $class = "\\{$namespace_base}\\base\\table\\{$tabela}";
-
-        $exc = new $class();
-        echo $exc->dbExecute();
+            $exc = new $tabela();
+            echo $exc->dbExecute();
+        }
     }
 }

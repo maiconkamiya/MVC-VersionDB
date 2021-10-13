@@ -84,7 +84,7 @@
                         $(row).css({'color':'red'});
                     else if (parseInt(data['current']) < parseInt(data['new']))
                         $(row).css({'color':'red'});
-                    $('td:eq(0)', row).html('<input type="checkbox" name="'+data['nome']+'">');
+                    $('td:eq(0)', row).html('<input type="checkbox" name="'+data['tabela']+'">');
                     $('td:eq(1)', row).html(data['nome']  + '<span class="d-block small">'+data['description']+'</span>');
                     $('td:eq(4)', row).html((data['important'] ? 'Sim' : 'Não'));
                     $('td:eq(5)', row).html((data['optional'] ? 'Sim' : 'Não'));
@@ -141,7 +141,9 @@
                 if (tabela != ''){
                     $("body .page-over-loader > .progress > .progress-text").text('Atualizando tabela ' + tabela);
 
-                    await $.get(window.Area + 'versao/atualizar/' + tabela, function(r){
+                    await $.post(window.Area + 'versao/atualizar/', {
+                        tabela: tabela
+                    }, function(r){
 
                         table.andamento.rows.add($(r));
                         table.andamento.draw();
