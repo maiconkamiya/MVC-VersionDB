@@ -42,12 +42,11 @@ class Version extends Model {
                 while (($dir = readdir($dh)) !== false) {
                     if ($dir!= '.' && $dir != '..'){
 
-                        echo $b.$dir;
-                        $default = "/src/Table/";
-                        if (is_dir($b.$dir . $default)) {
-                            echo $dir . $default;
-                            if ($dh = opendir($dir . $default)) {
-                                while (($file = readdir($dh)) !== false) {
+                        $default = $b . $dir . "/src/Table/";
+                        if (is_dir($default)) {
+                            echo $default;
+                            if ($fh = opendir($default)) {
+                                while (($file = readdir($fh)) !== false) {
                                     if ($file != '.' && $file != '..') {
 
                                         $namespace = $this->_extract_namespace($b . $file);
