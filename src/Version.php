@@ -44,13 +44,11 @@ class Version extends Model {
 
                         $default = $b . $dir . "/src/Table/";
                         if (is_dir($default)) {
-                            echo __DIR__ . "<br>";
-                            echo $default . "<br>";
                             if ($fh = opendir($default)) {
                                 while (($file = readdir($fh)) !== false) {
                                     if ($file != '.' && $file != '..') {
 
-                                        $namespace = $this->_extract_namespace($b . $file);
+                                        $namespace = $this->_extract_namespace($default . $file);
                                         $class = "{$namespace}\\" . str_replace('.php', '', $file);
                                         $list[] = $this->_object($class);
 
