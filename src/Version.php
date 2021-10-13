@@ -75,7 +75,7 @@ class Version extends Model {
         $exc = new $class();
 
         $temp = new \stdClass();
-        $temp->name = $name;
+        $temp->nome = $name;
         $temp->tabela = get_class($exc);
         $temp->current = $this->get($temp->tabela);
         $temp->new = $exc->build;
