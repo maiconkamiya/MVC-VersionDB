@@ -51,7 +51,7 @@ class Version extends Model {
 
                                         $namespace = $this->_extract_namespace($default . $file);
                                         $class = "{$namespace}\\" . str_replace('.php', '', $file);
-                                        $list[] = $this->_object($class, str_replace('.php', '', $file));
+                                        $list[] = $this->_object($class, $class);
                                     }
                                 }
                                 closedir($fh);
