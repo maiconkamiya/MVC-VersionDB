@@ -44,7 +44,8 @@ class Version extends Model {
 
                         $default = $b . $dir . "/src/Table/";
                         if (is_dir($default)) {
-                            echo $default;
+                            echo __DIR__ . "<br>";
+                            echo $default . "<br>";
                             if ($fh = opendir($default)) {
                                 while (($file = readdir($fh)) !== false) {
                                     if ($file != '.' && $file != '..') {
