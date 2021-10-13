@@ -17,7 +17,7 @@ class Version extends Model {
     }
 
     public function listTable(){
-        $a = "./src/base/tabela/";
+        $a = "./src/base/table/";
 
         $namespace_base = DEFINED('NAMESPACE_BASE') ? NAMESPACE_BASE : 'mvc';
 
