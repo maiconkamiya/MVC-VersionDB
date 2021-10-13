@@ -35,14 +35,15 @@ class Version extends Model {
             }
         }
 
-        $b = "./vendor/mtakeshi";
+        $b = "vendor/mtakeshi/";
 
         if (is_dir($b)) {
+
             if ($dh = opendir($b)) {
                 while (($dir = readdir($dh)) !== false) {
                     if ($dir!= '.' && $dir != '..'){
 
-                        $default = $b .'/'. $dir . "/src/Table/";
+                        $default = $b . $dir . "/src/Table/";
                         if (is_dir($default)) {
                             if ($fh = opendir($default)) {
                                 while (($file = readdir($fh)) !== false) {
@@ -53,7 +54,7 @@ class Version extends Model {
                                         $list[] = $this->_object($class);
                                     }
                                 }
-                                closedir($dh);
+                                closedir($fh);
                             }
                         }
                     }
