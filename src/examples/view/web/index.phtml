@@ -1,0 +1,166 @@
+<div class="nav-scroller bg-body shadow-sm">
+
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+        <a class="nav-link">Controle de Versão</a>
+        <a class="nav-link active" id="tabela-tab" data-bs-toggle="tab" href="#tabela" type="button" role="tab" aria-controls="tabela" aria-selected="true">Tabela</a>
+        <a class="nav-link" id="andamento-tab" data-bs-toggle="tab" href="#andamento" type="button" role="tab" aria-controls="andamento" aria-selected="true">Andamento</a>
+    </nav>
+</div>
+
+<div class="container-fluid mt-3">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="tab-content">
+                <div id="tabela" class="tab-pane active">
+
+                    <table class="table nowrap" style="width: 100%;" id="table-versao">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tabela</th>
+                            <th>Versão atual</th>
+                            <th>Versão nova</th>
+                            <th>Importante</th>
+                            <th>Opcional</th>
+                            <th>Atualizado</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                    <div class="">
+                        <button type="button" class="btn btn-primary" id="btn-selected-all">Selecionar tudo</button>
+                        <button type="button" class="btn btn-primary" id="btn-atualizar">Atualizar</button>
+                    </div>
+                </div>
+                <div id="andamento" class="tab-pane">
+                    <table class="table nowrap" style="width: 100%;" id="table-andamento">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tabela</th>
+                            <th>Comando</th>
+                            <th>#</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var temptitle = $('title').text();
+
+        var table = {
+            tabelas: $('#table-versao').DataTable({
+                dom: 'ftp',
+                scrollY: '370px',
+                scrollX: true,
+                paging: false,
+                columns: [
+                    {data: 'nome'},
+                    {data: 'tabela'},
+                    {data: 'current'},
+                    {data: 'new'},
+                    {data: 'important'},
+                    {data: 'optional'},
+                    {data: 'status'}
+                ],
+                rowCallback: function(row, data){
+                    if (data['current'] == '*')
+                        $(row).css({'color':'red'});
+                    else if (parseInt(data['current']) < parseInt(data['new']))
+                        $(row).css({'color':'red'});
+                    $('td:eq(0)', row).html('<input type="checkbox" name="'+data['nome']+'">');
+                    $('td:eq(1)', row).html(data['nome']  + '<span class="d-block small">'+data['description']+'</span>');
+                    $('td:eq(4)', row).html((data['important'] ? 'Sim' : 'Não'));
+                    $('td:eq(5)', row).html((data['optional'] ? 'Sim' : 'Não'));
+                    $('td:eq(6)', row).html((data['status'] ? 'Sim' : 'Não'));
+                }
+            }),
+
+            andamento: $('#table-andamento').DataTable({
+                dom: 'ftp',
+                scrollY: '370px',
+                scrollX: true,
+                paging: false,
+                rowCallback: function(row, data){
+                }
+            })
+        };
+
+        $.get(window.Area + 'versao/getlist', function(r){
+            table.tabelas.clear();
+            table.tabelas.rows.add(r);
+            table.tabelas.draw();
+        }, 'JSON');
+
+        $('#btn-selected-all').click(function(){
+            var itens = $('input[type="checkbox"]');
+
+            for(var n = 0; n<itens.length;n++){
+                itens[n].checked = true;
+            }
+        });
+
+        $('#btn-atualizar').click(function(){
+            atualizar();
+        });
+
+        async function atualizar(){
+            $('a[href="#andamento"]').tab('show');
+
+            $('body .page-over-loader').css({display: 'inherit'});
+            $('body .page-over-loader > .progress ').removeClass('d-none');
+            $('body .page-over-loader > .progress > .progress-bar').css({'width':'0%'});
+
+            var itens = $('input[type="checkbox"]:checked');
+            var tabela = "";
+
+            table.andamento.clear();
+
+            for(var n = 0; n<itens.length;n++){
+                itens[n].checked = false;
+                tabela = itens[n].name;
+
+                console.log('Tabela ', tabela);
+
+                if (tabela != ''){
+                    $("body .page-over-loader > .progress > .progress-text").text('Atualizando tabela ' + tabela);
+
+                    await $.get(window.Area + 'versao/atualizar/' + tabela, function(r){
+
+                        table.andamento.rows.add($(r));
+                        table.andamento.draw();
+
+                        return new Promise(resolve => resolve);
+                    });
+                }
+
+                $('body .page-over-loader > .progress > .progress-bar').css({'width': ((100/itens.length)*n) + '%'});
+                $('title').text(((100/itens.length)*n).toFixed(1) + '% ' + temptitle);
+            }
+
+            $('body .page-over-loader > .progress ').addClass('d-none');
+            $('body .page-over-loader').css({display: 'none'});
+            $('title').text(temptitle);
+        }
+    });
+
+    $('button[data-bs-toggle="tab"]').on('shown.bs.modal', function () {
+        $('#table-andamento').columns.adjust();
+    });
+</script>
