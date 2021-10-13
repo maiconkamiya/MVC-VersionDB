@@ -35,7 +35,7 @@ class Version extends Model {
             }
         }
 
-        $b = "vendor/mtakeshi/";
+        $b = "./vendor/mtakeshi/";
 
         if (is_dir($b)) {
 
