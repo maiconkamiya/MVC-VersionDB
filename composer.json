@@ -1,0 +1,23 @@
+{
+    "name": "mtakeshi/mvc-versiondb",
+    "description": "Ferramenta para instalar e atualizar banco de dados",
+    "minimum-stability": "dev",
+    "type": "library",
+    "license": "proprietary",
+    "keywords": ["php","mvc","versiondb"],
+    "homepage": "https://github.com/maiconkamiya/MVC-VersionDB",
+    "authors": [
+        {
+            "name": "Maicon Takeshi Kamiya",
+            "email": "maiconkamiya@hotmail.com"
+        }
+    ],
+    "require": {
+        "mtakeshi/mvc-framework": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "criativaBase\\": "src/"
+        }
+    }
+}
