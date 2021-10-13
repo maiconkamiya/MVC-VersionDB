@@ -57,7 +57,6 @@ class Version extends Model {
                                 closedir($dh);
                             }
                         }
-
                     }
                 }
                 closedir($dh);
