@@ -8,18 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="PHARS">
-        <CLASSES>
-          <root url="phar://$MODULE_DIR$/vendor/mtakeshi/mvc-framework/composer.phar" />
-          <root url="phar://$MODULE_DIR$/composer.phar" />
-        </CLASSES>
-        <SOURCES>
-          <root url="phar://$MODULE_DIR$/vendor/mtakeshi/mvc-framework/composer.phar" />
-          <root url="phar://$MODULE_DIR$/composer.phar" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/composer" />
@@ -29,6 +17,12 @@
           <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/mtakeshi/mvc-framework" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
