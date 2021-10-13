@@ -28,7 +28,7 @@ class Version extends Model {
                 while (($file = readdir($dh)) !== false) {
                     if ($file!= '.' && $file != '..'){
                         $class = "\\{$namespace_base}\\base\\table\\" . str_replace('.php','',$file);
-                        $list[] = $this->_object($class);
+                        $list[] = $this->_object($class, str_replace('.php', '', $file));
                     }
                 }
                 closedir($dh);
@@ -51,7 +51,7 @@ class Version extends Model {
 
                                         $namespace = $this->_extract_namespace($default . $file);
                                         $class = "{$namespace}\\" . str_replace('.php', '', $file);
-                                        $list[] = $this->_object($class);
+                                        $list[] = $this->_object($class, str_replace('.php', '', $file));
                                     }
                                 }
                                 closedir($fh);
@@ -71,10 +71,11 @@ class Version extends Model {
         return isset($query->build) ? $query->build : '*';
     }
 
-    private function _object( $class ){
+    private function _object( $class, $name ){
         $exc = new $class();
 
         $temp = new \stdClass();
+        $temp->name = $name;
         $temp->tabela = get_class($exc);
         $temp->current = $this->get($temp->tabela);
         $temp->new = $exc->build;
