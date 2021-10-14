@@ -12,9 +12,6 @@
             "email": "maiconkamiya@hotmail.com"
         }
     ],
-    "require": {
-        "mtakeshi/mvc-framework": "dev-main"
-    },
     "autoload": {
         "psr-4": {
             "criativaBase\\": "src/"
