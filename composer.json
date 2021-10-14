@@ -16,5 +16,8 @@
         "psr-4": {
             "criativaBase\\": "src/"
         }
+    },
+    "require": {
+        "mtakeshi/mvc-framework": "dev-main"
     }
 }
