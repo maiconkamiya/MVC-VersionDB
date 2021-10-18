@@ -67,7 +67,7 @@ class DataBase extends Model{
             $tab_versao = self::$prefix . 'versao';
 
             /*Versão*/
-            if ($this->_checkRow('versao',array('tabela'=>get_class($this)))){
+            if ($this->_checkRow($tab_versao,array('tabela'=>get_class($this)))){
                 $this->Execute("update `{$tab_versao}` SET build = ".$this->build.", descricao = '".$this->description."', dtupdate = NOW() WHERE tabela = '".get_class($this)."';");
             } else {
                 $this->Execute("insert into `{$tab_versao}` (tabela,descricao,build, dtupdate) value ('".get_class($this)."', '".$this->description."', '".$this->build."', NOW());");
