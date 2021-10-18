@@ -8,7 +8,7 @@ class DataBase extends Model{
     public $build = 1;
     public $description = "";
     public $important = false;
-    protected $optional = false;
+    public $optional = false;
     protected $cmd;
 
     public function dbExecute(){
