@@ -19,7 +19,6 @@ class versao extends DataBase {
         $tab_name = self::$prefix . "versao";
 
         $this->cmd[] = array("{$tab_name}",'create','',"CREATE TABLE IF NOT EXISTS `{$tab_name}` (
-        CREATE TABLE IF NOT EXISTS `{$tab_name}` (
               `tabela` varchar(75) NOT NULL,
               `descricao` text COLLATE utf8_unicode_ci,
               `dtupdate` datetime DEFAULT NULL,
