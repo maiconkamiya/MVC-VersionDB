@@ -102,7 +102,7 @@
             })
         };
 
-        $.get(window.Area + 'versao/getlist', function(r){
+        $.get(window.Area + 'criativaBase/versao/getlist', function(r){
             table.tabelas.clear();
             table.tabelas.rows.add(r);
             table.tabelas.draw();
@@ -141,7 +141,7 @@
                 if (tabela != ''){
                     $("body .page-over-loader > .progress > .progress-text").text('Atualizando tabela ' + tabela);
 
-                    await $.post(window.Area + 'versao/atualizar/', {
+                    await $.post(window.Area + 'criativaBase/versao/atualizar/', {
                         tabela: tabela
                     }, function(r){
 
