@@ -5,6 +5,13 @@ use criativa\lib\Controller;
 use criativaBase\Version;
 
 class versaoController extends Controller {
+
+    public function __construct(){
+        parent::__construct();
+
+        $this->layout = null;
+    }
+
     public function index(){
         $this->view();
     }
