@@ -1,5 +1,5 @@
 <?php
-namespace mvc\controller\web;
+namespace criativaBase\controller;
 
 use criativa\lib\Controller;
 use criativaBase\Version;
