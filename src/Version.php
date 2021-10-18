@@ -7,10 +7,14 @@ use criativa\lib\Model;
 
 class Version extends Model {
 
+    private $tab_name;
+
     public function __construct(){
         parent::__construct();
 
-        if (!$this->existsTable('versao')){
+        $this->tab_name = self::$prefix . "versao";
+
+        if (!$this->existsTable($this->tab_name)){
             $table = new versao();
             $table->dbExecute();
         }
@@ -67,7 +71,7 @@ class Version extends Model {
     }
 
     public function get($table){
-        $query = $this->First($this->Select("SELECT build FROM versao WHERE tabela = '{$table}'"));
+        $query = $this->First($this->Select("SELECT build FROM {$this->tab_name} WHERE tabela = '{$table}'"));
         return isset($query->build) ? $query->build : '*';
     }
 
