@@ -37,7 +37,7 @@ class DataBase extends Model{
                     if ($this->_checkRow($cmds[0],$cmds[2])){
                         $r = $this->Execute($cmds[3]);
                     }
-                } elseif (strtoupper($cmds[1]) == 'TRUNCATE'){
+                } elseif (strtoupper($cmds[1]) == 'EXECUTE'){
                     $r = $this->Execute($cmds[3]);
                 } elseif (strtoupper($cmds[1]) == 'IMPORTE'){
                     $this->importCSV($cmds[2],$cmds[3],$cmds[0],(isset($cmds[4]) ? $cmds[4] : array()),(isset($cmds[5]) ? $cmds[5] : ';'), (isset($cmds[6]) ? $cmds[6] : false));
