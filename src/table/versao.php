@@ -7,7 +7,7 @@
  */
 namespace criativaBase\table;
 
-use criativaBase\database;
+use criativaBase\DataBase;
 
 class versao extends DataBase {
     public function __construct(){
