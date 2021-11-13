@@ -1,54 +1,51 @@
 
+<div class="nav-tabs-top">
+    <nav class="nav nav-tabs">
+        <a class="nav-link active" id="tabela-tab" data-toggle="tab" href="#tabela" type="button" role="tab" aria-controls="tabela" aria-selected="true">Tabela</a>
+        <a class="nav-link" id="andamento-tab" data-toggle="tab" href="#andamento" type="button" role="tab" aria-controls="andamento" aria-selected="true">Andamento</a>
+    </nav>
 
-<div class="card">
-    <div class="nav-tabs-top">
-        <nav class="nav nav-tabs">
-            <a class="nav-link active" id="tabela-tab" data-toggle="tab" href="#tabela" type="button" role="tab" aria-controls="tabela" aria-selected="true">Tabela</a>
-            <a class="nav-link" id="andamento-tab" data-toggle="tab" href="#andamento" type="button" role="tab" aria-controls="andamento" aria-selected="true">Andamento</a>
-        </nav>
+    <div class="tab-content">
+        <div id="tabela" class="tab-pane active">
+            <div class="card-body">
+                <table class="table nowrap" style="width: 100%;" id="table-versao">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tabela</th>
+                        <th>Versão atual</th>
+                        <th>Versão nova</th>
+                        <th>Importante</th>
+                        <th>Opcional</th>
+                        <th>Atualizado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-        <div class="tab-content">
-            <div id="tabela" class="tab-pane active">
-                <div class="card-body">
-                    <table class="table nowrap" style="width: 100%;" id="table-versao">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tabela</th>
-                            <th>Versão atual</th>
-                            <th>Versão nova</th>
-                            <th>Importante</th>
-                            <th>Opcional</th>
-                            <th>Atualizado</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    </tbody>
+                </table>
 
-                        </tbody>
-                    </table>
-
-                    <div class="text-right">
-                        <button type="button" class="btn btn-sm btn-primary" id="btn-selected-all">Selecionar tudo</button>
-                        <button type="button" class="btn btn-sm btn-primary" id="btn-atualizar">Atualizar</button>
-                    </div>
+                <div class="text-right mt-2">
+                    <button type="button" class="btn btn-sm btn-primary" id="btn-selected-all">Selecionar tudo</button>
+                    <button type="button" class="btn btn-sm btn-primary" id="btn-atualizar">Atualizar</button>
                 </div>
             </div>
-            <div id="andamento" class="tab-pane">
-                <div class="card-body">
-                    <table class="table nowrap" style="width: 100%;" id="table-andamento">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tabela</th>
-                            <th>Comando</th>
-                            <th>#</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+        </div>
+        <div id="andamento" class="tab-pane">
+            <div class="card-body">
+                <table class="table nowrap" style="width: 100%;" id="table-andamento">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tabela</th>
+                        <th>Comando</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
