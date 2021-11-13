@@ -8,7 +8,7 @@
     <div class="tab-content">
         <div id="tabela" class="tab-pane active">
             <div class="card-body">
-                <table class="table nowrap" style="width: 100%;" id="table-versao">
+                <table class="table table-striped" style="width: 100%;" id="table-versao">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -20,6 +20,9 @@
                         <th>Atualizado</th>
                     </tr>
                     </thead>
+                    <tbody>
+
+                    </tbody>
                 </table>
 
                 <div class="text-right mt-2">
@@ -30,7 +33,7 @@
         </div>
         <div id="andamento" class="tab-pane">
             <div class="card-body">
-                <table class="table nowrap" style="width: 100%;" id="table-andamento">
+                <table class="table table-nowrap" style="width: 100%;" id="table-andamento">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -53,10 +56,13 @@
 
         var table = {
             tabelas: $('#table-versao').DataTable({
-                dom: 'ftp',
+                dom: 'ft',
+                destroy: true,
+                draw: true,
                 scrollY: '370px',
-                scrollX: true,
+                scrollX: false,
                 paging: false,
+                autoWidth: false,
                 columns: [
                     {data: 'nome'},
                     {data: 'tabela'},
@@ -80,14 +86,21 @@
             }),
 
             andamento: $('#table-andamento').DataTable({
-                dom: 'ftp',
+                dom: 'ft',
+                destroy: true,
+                draw: true,
                 scrollY: '370px',
-                scrollX: true,
+                scrollX: false,
                 paging: false,
+                autoWidth: false,
                 rowCallback: function(row, data){
                 }
             })
         };
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
+            table.andamento.columns.adjust();
+        });
 
         $.get(window.Area + 'criativaBase/versao/getlist', function(r){
             table.tabelas.clear();
