@@ -2,6 +2,7 @@
 
 namespace criativaBase;
 
+use criativa\lib\Config;
 use criativa\lib\Model;
 
 class DataBase extends Model{
@@ -86,6 +87,7 @@ class DataBase extends Model{
 
         while (($line = fgets($source_file)) !== false) {
             $line = str_replace(array("\n","\r","\t"), " ", $line);
+            $line = str_replace("__PREFIX__", Config::$prefix, $line);
             $sql .= $line;
         }
 
