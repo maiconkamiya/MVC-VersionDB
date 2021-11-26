@@ -3,7 +3,7 @@ namespace criativaBase\table;
 
 use criativaBase\DataBase;
 
-class versao extends DataBase {
+class sincronizador extends DataBase {
     public function __construct(){
 
         parent::__construct();

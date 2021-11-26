@@ -3,7 +3,7 @@ namespace criativaBase\table;
 
 use criativaBase\DataBase;
 
-class m2numerador extends DataBase {
+class numerador extends DataBase {
     public function __construct(){
         parent::__construct();
 
