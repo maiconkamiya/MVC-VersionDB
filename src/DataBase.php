@@ -153,7 +153,7 @@ class DataBase extends Model{
 
         if (empty($condition)){
             foreach ($condition as $i => $v){
-                if ($v == 'primarykey'){
+                if ($v == '{{primarykey}}'){
                     $primarykey = $i;
                 }
             }
