@@ -149,6 +149,16 @@ class DataBase extends Model{
 
     public function importCSV($file, $columns, $table, $condition = "", $glu = ";", $seo = false){
 
+        $primarykey = null;
+
+        if (empty($condition)){
+            foreach ($condition as $i => $v){
+                if ($v == 'primarykey'){
+                    $primarykey = $i;
+                }
+            }
+        }
+
         if (!file_exists($file))
             die("Arquivo {$file} não localizado!");
 
@@ -168,8 +178,11 @@ class DataBase extends Model{
 
                 if ($ex[$i] == "null")
                     $ex[$i] = null;
-            }
 
+                if (!is_null($primarykey) && $i == $primarykey){
+                    $condition[$i] = $ex[$i];
+                }
+            }
 
             if (empty($condition) || !$this->_checkRow($table,$condition)){
                 $sql = "INSERT INTO {$table} (".implode(",",array_values($columns)).") VALUES (\"".implode('","',array_values($ex))."\")";
@@ -178,8 +191,6 @@ class DataBase extends Model{
 
                 echo $sql;
             }
-
-
         }
     }
 
