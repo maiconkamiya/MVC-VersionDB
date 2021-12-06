@@ -150,12 +150,19 @@ class DataBase extends Model{
     public function importCSV($file, $columns, $table, $condition = "", $glu = ";", $seo = false){
 
         $primarykey = null;
+        $indexkey = null;
 
-        if (empty($condition)){
+        if (!empty($condition)){
             foreach ($condition as $i => $v){
                 if ($v == '{{primarykey}}'){
                     $primarykey = $i;
                 }
+            }
+        }
+
+        foreach ($columns as $i => $v){
+            if ($v == $primarykey){
+                $indexkey = $i;
             }
         }
 
@@ -178,18 +185,16 @@ class DataBase extends Model{
 
                 if ($ex[$i] == "null")
                     $ex[$i] = null;
+            }
 
-                if (!is_null($primarykey) && $i == $primarykey){
-                    $condition[$i] = $ex[$i];
-                }
+            if (!is_null($primarykey)){
+                $condition[$primarykey] = $ex[$indexkey];
             }
 
             if (empty($condition) || !$this->_checkRow($table,$condition)){
                 $sql = "INSERT INTO {$table} (".implode(",",array_values($columns)).") VALUES (\"".implode('","',array_values($ex))."\")";
-
+                //echo $sql;
                 $this->Execute($sql);
-
-                echo $sql;
             }
         }
     }
