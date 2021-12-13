@@ -2,6 +2,7 @@
 
 namespace criativaBase;
 
+use criativaBase\table\logmysql;
 use criativaBase\table\versao;
 use criativa\lib\Model;
 
@@ -14,8 +15,15 @@ class Version extends Model {
 
         $this->tab_name = self::$prefix . "versao";
 
+        $this->tab_name_log = self::$prefix . "logmysql";
+
         if (!$this->existsTable($this->tab_name)){
             $table = new versao();
+            $table->dbExecute();
+        }
+
+        if (!$this->existsTable($this->tab_name_log)){
+            $table = new logmysql();
             $table->dbExecute();
         }
     }
