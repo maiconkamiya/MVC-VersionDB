@@ -18,7 +18,7 @@ class versaoController extends Controller {
 
     public function install(){
         $this->layout = '_layout';
-        $this->view();
+        $this->view('index');
     }
 
     public function getlist(){
