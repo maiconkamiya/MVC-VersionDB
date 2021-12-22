@@ -16,6 +16,11 @@ class versaoController extends Controller {
         $this->view();
     }
 
+    public function install(){
+        $this->layout = '_layout';
+        $this->view();
+    }
+
     public function getlist(){
         $api = new Version();
         echo json_encode($api->listTable());
