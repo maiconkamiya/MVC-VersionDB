@@ -17,6 +17,9 @@ class versaoController extends Controller {
     }
 
     public function install(){
+        $exc = new \criativaRoutine\table\rotina();
+        echo $exc->dbExecute();
+
         $api = new Version();
         foreach ($api->listTable() as $i => $v){
             $exc = new $v->tabela();
