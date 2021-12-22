@@ -17,8 +17,11 @@ class versaoController extends Controller {
     }
 
     public function install(){
-        $this->layout = '_layout';
-        $this->view('index');
+        $api = new Version();
+        foreach ($api->listTable() as $i => $v){
+            $exc = new $v->tabela();
+            echo $exc->dbExecute();
+        }
     }
 
     public function getlist(){
