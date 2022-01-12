@@ -17,6 +17,8 @@ class Version extends Model {
 
         $this->tab_name_log = self::$prefix . "logmysql";
 
+        $this->tab_name_routine = self::$prefix . "routine";
+
         if (!$this->existsTable($this->tab_name)){
             $table = new versao();
             $table->dbExecute();
@@ -24,6 +26,11 @@ class Version extends Model {
 
         if (!$this->existsTable($this->tab_name_log)){
             $table = new logmysql();
+            $table->dbExecute();
+        }
+
+        if (!$this->existsTable($this->tab_name_routine)){
+            $table = new \criativaRoutine\table\rotina();
             $table->dbExecute();
         }
     }

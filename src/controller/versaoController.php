@@ -17,12 +17,6 @@ class versaoController extends Controller {
     }
 
     public function install(){
-        $exc = new \criativaBase\table\logmysql();
-        echo $exc->dbExecute();
-
-        $exc = new \criativaRoutine\table\rotina();
-        echo $exc->dbExecute();
-
         $api = new Version();
         foreach ($api->listTable() as $i => $v){
             $exc = new $v->tabela();
