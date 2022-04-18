@@ -30,7 +30,7 @@ class versao extends DataBase {
 
         $this->build = 1;
 
-        $this->cmd[] = array('','READSQL', __DIR__ . '/../functions/fn_exists_procedure.sql', array(array('ROTINA','fn_exists_procedure')));
+        $this->cmd[] = array('','READSQL', __DIR__ . '/../function/fn_exists_procedure.sql', array(array('ROTINA','fn_exists_procedure')));
 
         $this->build = 2;
     }
