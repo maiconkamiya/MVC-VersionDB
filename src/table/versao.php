@@ -29,5 +29,9 @@ class versao extends DataBase {
         $this->cmd[] = array($tab_name,'add','tabela',"ALTER TABLE `{$tab_name}` ADD `tabela` varchar(75) NOT NULL FIRST;");
 
         $this->build = 1;
+
+        $this->cmd[] = array('','READSQL', __DIR__ . '/../functions/fn_exists_procedure.sql', array(array('ROTINA','fn_exists_procedure')));
+
+        $this->build = 2;
     }
 }
