@@ -1,8 +1,8 @@
 <?php
-namespace criativaBase\controller;
+namespace criativa\base\controller;
 
 use criativa\lib\Controller;
-use criativaBase\Version;
+use criativa\base\Version;
 
 class versaoController extends Controller {
 

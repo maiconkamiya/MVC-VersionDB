@@ -1,6 +1,6 @@
 <?php
 
-namespace criativaBase;
+namespace criativa\base;
 
 use criativa\lib\Config;
 use criativa\lib\Model;

@@ -5,9 +5,9 @@
  * Date: 16/02/2018
  * Time: 15:09
  */
-namespace criativaBase\table;
+namespace criativa\base\table;
 
-use criativaBase\DataBase;
+use criativa\base\DataBase;
 
 class versao extends DataBase {
     public function __construct(){

@@ -1,8 +1,8 @@
 <?php
-namespace criativaBase\api;
+namespace criativa\base\api;
 
 use criativa\lib\Model;
-use criativaBase\object\Sincronizador;
+use criativa\base\object\Sincronizador;
 
 class ApiSincronizador extends Model {
 

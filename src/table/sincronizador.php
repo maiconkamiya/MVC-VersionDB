@@ -1,7 +1,7 @@
 <?php
-namespace criativaBase\table;
+namespace criativa\base\table;
 
-use criativaBase\DataBase;
+use criativa\base\DataBase;
 
 class sincronizador extends DataBase {
     public function __construct(){

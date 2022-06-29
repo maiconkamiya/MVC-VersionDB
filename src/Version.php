@@ -1,9 +1,9 @@
 <?php
 
-namespace criativaBase;
+namespace criativa\base;
 
-use criativaBase\table\logmysql;
-use criativaBase\table\versao;
+use criativa\base\table\logmysql;
+use criativa\base\table\versao;
 use criativa\lib\Model;
 
 class Version extends Model {

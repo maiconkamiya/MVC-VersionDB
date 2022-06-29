@@ -1,5 +1,5 @@
 <?php
-namespace criativaBase\object;
+namespace criativa\base\object;
 
 use criativa\lib\Obj;
 
