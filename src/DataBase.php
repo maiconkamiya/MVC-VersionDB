@@ -49,6 +49,14 @@ class DataBase extends Model{
 
 
                 if (!is_null($r)){
+                    echo json_encode(array(
+                        'sucess'=>$r['sucess'],
+                        'tabela'=>$cmds[0],
+                        'comando'=>$cmds[1],
+                        'feedback'=>isset($r['feedback']) ? $r['feedback'] : '',
+                        'sintaxe'=>!$r['sucess'] ? (isset($r['sql']) ? $r['sql'] : '') : ''
+                    ));
+                    /*
                     echo "<tr>";
                     echo "<td>" . ($r['sucess'] || is_null($r) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-exclamation-triangle text-danger"></i>') . "</td>";
                     echo "<td>$cmds[0]</td>";
@@ -60,6 +68,7 @@ class DataBase extends Model{
                     }
                     echo "</td>";
                     echo "</tr>";
+                    */
                 }
 
                 $i++;
@@ -93,6 +102,14 @@ class DataBase extends Model{
 
         $r = $this->Execute($sql);
         
+        echo json_encode(array(
+            'sucess'=>$r['sucess'],
+            'tabela'=>$file,
+            'comando'=>'',
+            'feedback'=>isset($r['feedback']) ? $r['feedback'] : '',
+            'sintaxe'=>!$r['sucess'] ? (isset($r['sql']) ? $r['sql'] : '') : ''
+        ));
+        /*
         echo "<tr>";
         echo "<td>" . ($r['sucess'] || is_null($r) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-exclamation-triangle text-danger"></i>') . "</td>";
         echo "<td>$file</td>";
@@ -104,6 +121,7 @@ class DataBase extends Model{
         }
         echo "</td>";
         echo "</tr>";
+        */
 
         if (count($check) >0){
             foreach ($check as $i=>$v){
@@ -118,12 +136,21 @@ class DataBase extends Model{
                 }
 
                 if (!is_null($r)){
+                    echo json_encode(array(
+                        'sucess'=>$r,
+                        'tabela'=>"Trigger/Rotina {$v[1]}",
+                        'comando'=>'Verificação',
+                        'feedback'=>($r ? 'existe' : $v[1] . ' não existe'),
+                        'sintaxe'=>''
+                    ));
+                    /*
                     echo "<tr>";
                     echo "<td>" . ($r ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-exclamation-triangle text-danger"></i>') . "</td>";
                     echo "<td>Trigger/Rotina {$v[1]}</td>";
                     echo "<td>Verificação</td>";
                     echo "<td>".($r ? 'existe' : $v[1] . ' não existe')."</td>";
                     echo "</tr>";
+                    */
                 }
             }
         }

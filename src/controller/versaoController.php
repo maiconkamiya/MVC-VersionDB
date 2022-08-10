@@ -2,6 +2,7 @@
 namespace criativa\base\controller;
 
 use criativa\lib\Controller;
+use criativa\lib\Obj;
 use criativa\base\Version;
 
 class versaoController extends Controller {
@@ -43,8 +44,9 @@ class versaoController extends Controller {
     }
 
     public function atualizar(){
-        if (isset($_POST['tabela'])){
-            $tabela = $_POST['tabela'];
+        $obj = new Obj('POST');
+        if (isset($obj->tabela)){
+            $tabela = $obj->tabela;
 
             $exc = new $tabela();
             echo $exc->dbExecute();
