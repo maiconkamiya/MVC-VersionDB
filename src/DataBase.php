@@ -87,8 +87,15 @@ class DataBase extends Model{
 
     public function readSQL($file, Array $check = null){
         if (!file_exists($file)){
-            echo "Arquivo {$file} não existe!";
-            return;
+            // echo "Arquivo {$file} não existe!";
+            $array[] = array(
+                'sucess'=>false,
+                'tabela'=>$file,
+                'comando'=>'',
+                'feedback'=>'Arquivo {$file} não existe!',
+                'sintaxe'=>''
+            );
+            return $array;
         }
         $sql = "";
         $t = time();
