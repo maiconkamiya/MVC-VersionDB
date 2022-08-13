@@ -17,6 +17,7 @@ class DataBase extends Model{
         $i = 0;
         $r = null;
         if (is_array($this->cmd)){
+            $array = array();
             foreach ($this->cmd as $cmds){
 
 
@@ -43,19 +44,22 @@ class DataBase extends Model{
                 } elseif (strtoupper($cmds[1]) == 'IMPORTE'){
                     $this->importCSV($cmds[2],$cmds[3],$cmds[0],(isset($cmds[4]) ? $cmds[4] : array()),(isset($cmds[5]) ? $cmds[5] : ';'), (isset($cmds[6]) ? $cmds[6] : false));
                 } elseif (strtoupper($cmds[1]) == 'READSQL'){
-                    $this->readSQL($cmds[2], isset($cmds[3]) ? $cmds[3] : array());
+                    $re = $this->readSQL($cmds[2], isset($cmds[3]) ? $cmds[3] : array());
+                    foreach($re as $li) {
+                        $array[] = $li;
+                    }
                     $r = null;
                 }
 
 
                 if (!is_null($r)){
-                    echo json_encode(array(
+                    $array[] = array(
                         'sucess'=>$r['sucess'],
                         'tabela'=>$cmds[0],
                         'comando'=>$cmds[1],
                         'feedback'=>isset($r['feedback']) ? $r['feedback'] : '',
                         'sintaxe'=>!$r['sucess'] ? (isset($r['sql']) ? $r['sql'] : '') : ''
-                    ));
+                    );
                     /*
                     echo "<tr>";
                     echo "<td>" . ($r['sucess'] || is_null($r) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-exclamation-triangle text-danger"></i>') . "</td>";
@@ -83,6 +87,7 @@ class DataBase extends Model{
                 $this->Execute("insert into `{$tab_versao}` (tabela,descricao,build, dtupdate) value ('".get_class($this)."', '".$this->description."', '".$this->build."', NOW());");
             }
         }
+        echo json_encode($array);
     }
 
     public function readSQL($file, Array $check = null){
@@ -108,14 +113,15 @@ class DataBase extends Model{
         }
 
         $r = $this->Execute($sql);
-        
-        echo json_encode(array(
+        $array = array();
+        $array[] = array(
             'sucess'=>$r['sucess'],
             'tabela'=>$file,
             'comando'=>'',
             'feedback'=>isset($r['feedback']) ? $r['feedback'] : '',
             'sintaxe'=>!$r['sucess'] ? (isset($r['sql']) ? $r['sql'] : '') : ''
-        ));
+        );
+        
         /*
         echo "<tr>";
         echo "<td>" . ($r['sucess'] || is_null($r) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-exclamation-triangle text-danger"></i>') . "</td>";
@@ -143,13 +149,13 @@ class DataBase extends Model{
                 }
 
                 if (!is_null($r)){
-                    echo json_encode(array(
+                    $array[] = array(
                         'sucess'=>$r,
                         'tabela'=>"Trigger/Rotina {$v[1]}",
                         'comando'=>'Verificação',
                         'feedback'=>($r ? 'existe' : $v[1] . ' não existe'),
                         'sintaxe'=>''
-                    ));
+                    );
                     /*
                     echo "<tr>";
                     echo "<td>" . ($r ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-exclamation-triangle text-danger"></i>') . "</td>";
@@ -161,6 +167,7 @@ class DataBase extends Model{
                 }
             }
         }
+        return $array;
     }
 
     private function _checkColumn($table, $column){
