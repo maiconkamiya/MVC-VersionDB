@@ -52,4 +52,11 @@ class versaoController extends Controller {
             echo $exc->dbExecute();
         }
     }
+
+    public function atualiza(){
+        $tabela = str_replace('_','\\',$this->getParams(0));
+
+        $exc = new $tabela();
+        echo $exc->dbExecute();
+    }
 }
