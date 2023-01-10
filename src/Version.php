@@ -30,8 +30,10 @@ class Version extends Model {
         }
 
         if (!$this->existsTable($this->tab_name_routine)){
+          if (class_exists('\criativa\routine\table\rotina')) {
             $table = new \criativa\routine\table\rotina();
             $table->dbExecute();
+          }
         }
     }
 
