@@ -80,11 +80,15 @@ class DataBase extends Model{
 
             $tab_versao = self::$prefix . 'versao';
 
+            $tabela = get_class($this);
+            $tabela = explode('\\',$tabela);
+            $tabela = $tabela[count($tabela)-1];
+
             /*Versão*/
-            if ($this->_checkRow($tab_versao,array('tabela'=>get_class($this)))){
-                $this->Execute("update `{$tab_versao}` SET build = ".$this->build.", descricao = '".$this->description."', dtupdate = NOW() WHERE tabela = '".get_class($this)."';");
+            if ($this->_checkRow($tab_versao,array('tabela'=>$tabela))){
+                $this->Execute("update `{$tab_versao}` SET build = ".$this->build.", descricao = '".$this->description."', dtupdate = NOW() WHERE tabela = '".$tabela."';");
             } else {
-                $this->Execute("insert into `{$tab_versao}` (tabela,descricao,build, dtupdate) value ('".get_class($this)."', '".$this->description."', '".$this->build."', NOW());");
+                $this->Execute("insert into `{$tab_versao}` (tabela,descricao,build, dtupdate) value ('".$tabela."', '".$this->description."', '".$this->build."', NOW());");
             }
         }
         echo json_encode($array);

@@ -98,7 +98,7 @@ class Version extends Model {
         $temp = new \stdClass();
         $temp->nome = $name;
         $temp->tabela = get_class($exc);
-        $temp->current = $this->get($temp->tabela);
+        $temp->current = $this->get($name);
         $temp->new = $exc->build;
         $temp->description = $exc->description;
         $temp->important = $exc->important;
